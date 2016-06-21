@@ -1,0 +1,6 @@
+cmdstats==0.3
+Django==1.9.7
+django-filter==0.13.0
+djangorestframework==3.3.3
+MySQL-python==1.2.5
+wheel==0.24.0

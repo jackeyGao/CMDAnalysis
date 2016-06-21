@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load tools %}
+{% block title %} {{ box.pk }} {% endblock %} 
+
+{% block right_header %}
+{% endblock %}
+
+{% block content %}
+
+<div class="ui greyborder grid" style="margin-left: 35px;margin-right: 35px;">
+
+  {% if box.shell == "ZS" %}
+  <div class="sixteen wide column">
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <div class="ui divider"></div>
+  </div>
+  {% endif %}
+
+  <div class="sixteen wide column">
+    <div class="ui two column divided stackable grid">
+      <div class="eight wide column">
+        <div id="top-command" class="ui selection list">
+        <!--
+          <div class="monospaced item">
+            <div class="right floated content">
+              <span class="yellow text" style="position: absolute;right: 100px;">2106 times</span>
+              <span class="green text"> 21%</span>
+            </div>
+            <div class="content">
+              <span class="grey text" style="font-size: 15px;"><b>vim</b></span>
+            </div>
+          </div>
+          -->
+        </div>
+      </div>
+      <div class="eight wide column">
+        <div id="top-pie" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

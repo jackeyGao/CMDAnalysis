@@ -1,0 +1,19 @@
+web:
+  build: .
+  ports:
+    - "8000:8000"
+  links:
+    - mysql:mysql
+  env_file: .env
+  command: /code/manage.py runserver 0.0.0.0:8000
+
+mysql:
+  image: mysql:latest
+  environment:
+    - LANG=C.UTF-8
+    - MYSQL_DATABASE=cmd_analysis 
+    - MYSQL_ROOT_PASSWORD=mysql
+  volumes:
+    - ./mysql.cnf:/etc/mysql/conf.d/my.cnf
+  ports:
+    - "3306:3306"

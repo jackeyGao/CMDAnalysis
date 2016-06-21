@@ -1,0 +1,132 @@
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>{% block title %} {% endblock %} Analysis </title>
+    <link rel="stylesheet" type="text/css" href="{% static "semantic.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "style.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "prettify.min.css" %}">
+    <script src="{% static "prettify.min.js" %}"></script>
+    <script src="{% static "jquery.js" %}"></script>
+    <script src="{% static "web.js" %}"></script>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+    <script type="text/javascript">
+      function createURL() {
+        $.ajax({'url': '/url/create/', 'type': 'GET', 
+          'success': function(data) {
+          window.location.href = "/inspect/"+data+"/";
+       }
+     });
+      }
+
+    </script>
+  </head>
+  <body onload="prettyPrint()">
+    <a name="top"></a>
+    <div class="ui fluid container">
+      <div class="ui grid" style="margin-left: 35px;margin-right: 35px;">
+        <div class="four wide column"  style="margin-top: 80px;">
+          <div class="bottom-right" style="float: right;">
+            <a href="/">
+            <h1 class="ui blue header" style="font-size: 3em;">CMD<span  class="text grey">Analysis</span></h1>
+            </a>
+          </div>
+        </div>
+        <div class="twelve wide column">
+        {% block right_header %} {% endblock %}
+        </div>
+      </div>
+    </div>
+    <div class="content-wrap" style="margin-top: 30px;">
+    {% block content %} {% endblock %}
+    </div>
+    <div class="footer-wrap">
+      <div class="ui grid">
+        <div class="three wide column"></div>
+        <div class="ten wide column">
+          <div class="ui grid">
+            <div class="five wide column">
+              <h4 class="ui grey header">项目</h4>
+              <div class="ui inverted link list">
+                <div class="item">
+                  <div class="content">
+                    <a class="item" href="http://meta.omem.me/">
+                      <h5 class="ui grey header">Request<span class="text green">Meta</span></h5>
+                    </a>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="content">
+                    <a class="item" href="http://knows.omem.me/">
+                      <h5 class="ui green header">Http<span class="text grey">Knows</span></h5>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="four wide column">
+              <h4 class="ui grey header">联系方式</h4>
+              <div class="ui list">
+                  <a class="item" href="mailto:gaojunqi@outlook.com">
+                    Email
+                  </a>
+                  <a class="item" href="https://github.com/jackeyGao">
+                    Github
+                  </a>
+                  <a class="item" href="https://twitter.com/JackeyGaoo">
+                    Twitter
+                  </a>
+                  <a class="item" href="https://coding.net/u/jackeygao">
+                    Coding
+                  </a>
+              </div>
+            </div>
+
+            <div class="four wide column">
+              <h4 class="ui grey header">关于</h4>
+              <div class="ui list">
+                  <a class="item" href="http://omem.me/about/">
+                    关于我
+                  </a>
+                  <a class="item" href="http://omem.me/">
+                    博客
+                  </a>
+                  <a class="item" href="https://www.conoha.jp/referral/?token=G8vOyReluNtZN0fQSSAyNzldtPOCAFhanp39bkuppaJG.w90xHc-01S">
+                    主机托管
+                  </a>
+                  <a class="item" href="https://portal.qiniu.com/signup?code=3lkleyn0zr7ma">
+                    静态托管
+                  </a>
+              </div>
+            </div>
+            <div class="three wide column">
+              <h4 class="ui grey header">微信</h4>
+              <img class="ui image" src="{% static "images/wechat.png" %}">
+            </div>
+          </div>
+        </div>
+        <div class="three wide column"></div>
+        <div class="sixteen wide column">
+        <div class="ui inverted divider"></div>
+          <div class="ui fluid wrapper container">
+            <div>
+                <span class="teal text" style="font-size: 12px;">© 2016 JackeyGao. Power by <a href="https://   www.djangoproject.com/"><span class="green text">Django</span></a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+    $(function () {
+      init_line();
+      init_top_list();
+      init_top_pie();
+    });
+    </script>
+  </body> 
+</html>
+

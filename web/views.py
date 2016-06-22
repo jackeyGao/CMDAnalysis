@@ -40,8 +40,8 @@ def index(request):
         box.count = Command.objects.filter(box=box).count()
 
     # set cookie 
-    reponse = render_to_response('index.html', locals()) 
     expires = datetime.now() + timedelta(days=7)
+    response = render_to_response('index.html', locals()) 
     response.set_cookie('user', _tk, expires=expires)
     return response
 

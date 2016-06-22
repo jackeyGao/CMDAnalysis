@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
+from django.middleware.csrf import _get_new_csrf_key
 from web.models import Box
 from web.models import Command
 from web.utils import get_domain_from_wsgirequest

@@ -23,18 +23,25 @@ def set_cookie(fn):
     return wrapper
 
 
-@set_cookie
 def detail(request):
     box = request.GET.get("box", 'none')
     box = get_object_or_404(Box, pk=box)
     return render_to_response('detail.html', locals()) 
 
 
-@set_cookie
 def index(request):
     user = request.COOKIES.get('user', None)
+    if not user:
+        user = _get_new_csrf_key()
+
     boxs = Box.objects.filter(user=user)
+    domain = get_domain_from_wsgirequest(request)
     for box in boxs:
         box.count = Command.objects.filter(box=box).count()
-    domain = get_domain_from_wsgirequest(request)
-    return render_to_response('index.html', locals()) 
+
+    # set cookie 
+    reponse = render_to_response('index.html', locals()) 
+    expires = datetime.now() + timedelta(days=7)
+    response.set_cookie('user', _tk, expires=expires)
+    return response
+

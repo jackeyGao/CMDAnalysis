@@ -44,11 +44,11 @@
     {% endfor %}
   </div>
   {% endif %}
-  <h4 class="ui grey header">zsh</h4>
+  <h4 class="ui grey header">ZSH</h4>
   <pre class="prettyprint">curl -F "user={{user}}" \
      -F "file=@$HOME/.zsh_history" \
      {{ domain }}/api/history/</pre>
-  <h4 class="ui grey header">bash</h4>
+  <h4 class="ui grey header">BASH</h4>
   <pre class="prettyprint">curl -F "user={{user}}" \
      -F "file=@$HOME/.bash_history" \
      {{ domain }}/api/history/</pre>

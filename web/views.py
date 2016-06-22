@@ -42,6 +42,6 @@ def index(request):
     # set cookie 
     expires = datetime.now() + timedelta(days=7)
     response = render_to_response('index.html', locals()) 
-    response.set_cookie('user', _tk, expires=expires)
+    response.set_cookie('user', user, expires=expires)
     return response
 

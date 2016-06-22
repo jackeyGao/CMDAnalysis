@@ -27,9 +27,9 @@ router = SimpleRouter()
 router.register(r'command', CommandList)
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^$', index),
-    url(r'^detail/', detail),
-    url(r'^api/history/', FileUploadView.as_view()),
-    url(r'^api/', include(router.urls)),
+    url(r'^admin/', admin.site.urls, name="admin"),
+    url(r'^$', index, name="index"),
+    url(r'^detail/', detail, name="detail"),
+    url(r'^api/history/', FileUploadView.as_view(), name="history"),
+    url(r'^api/', include(router.urls), name="api"),
 ]

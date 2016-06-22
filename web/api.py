@@ -23,9 +23,11 @@ from cmdstats import ParseZshHistoryFile
 from cmdstats import ParseBashHistoryFile
 from web.models import Command
 from web.models import Box
+from web.utils import get_domain_from_wsgirequest
 
 reload(sys)
 sys.setdefaultencoding("utf-8")
+
 
 def handle_uploaded_file(f, box):
     obs = []
@@ -62,10 +64,12 @@ class FileUploadView(APIView):
     parser_classes = (FormParser, MultiPartParser, )
 
     def post(self, request, format='text/plain'):
-        box = Box.objects.create(_id=str(uuid.uuid4())[:8])
+        user = request.data["user"]
+        box = Box.objects.create(_id=str(uuid.uuid4())[:8], user=user)
         obs = handle_uploaded_file(request.data['file'],box)
         Command.objects.bulk_create(obs)
-        return Response('http://127.0.0.1:8000/detail/?box=%s' % box.pk)
+        domain = get_domain_from_wsgirequest(request._request)
+        return Response('%s/detail/?box=%s' % (domain, box.pk))
 
 
 class CommandList(viewsets.ModelViewSet):

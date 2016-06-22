@@ -11,6 +11,7 @@ AllowShellTypes = (
 
 class Box(models.Model):
     _id = models.CharField(max_length=10, primary_key=True)
+    user = models.CharField(max_length=32, default=None)
     shell = models.CharField(max_length=2,
             choices=AllowShellTypes, default=None,
             null=True, blank=True)

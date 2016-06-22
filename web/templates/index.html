@@ -8,26 +8,50 @@
 {% block content %}
 
 <div class="ui centered grid">
-<div class="six wide column">
+<div class="seven wide column">
   <p class="text grey">
-  <span class="blue text">CMD</span><span class="grey text">Analysis</span> 是一个终端历史命令可视化工具. 目前支持对bash, zsh 命令历史文件进行分析. 注重安全, 分析后即删除.使用下面命令来可视化历史文件, 每次调用都会生成一个url, 通过url可以访问可视化详细页面.
+  <span class="blue text">CMD</span><span class="grey text">Analysis</span> 是一个终端历史命令可视化工具. 目前支持对bash, zsh 命令历史文件进行分析. 注重安全, 分析后即删除. 使用下面命令来可视化历史文件, 每次调用都会生成一个url, 通过url可以访问可视化详细页面.
   </p>
 </div>
 <div class="sixteen wide column">
   <div class="ui fluid centered grid" style="background-color: #eeeeee;">
-    <div class="six wide column">
+    <div class="seven wide column">
       <i class="github icon"></i>
       <a href="https://github.com/jackeyGao/CMDAnalysis">Star on Github</a>
     </div>
   </div>
 </div>
-<div class="six wide column" style="font-family: Courier New;">
+<div class="seven wide column" style="font-family: Courier New;">
+  <h3 class="ui center aligned header">User Key</h3>
+  <div class="wrapper">
+    <div class="ui left input" style="width: 100%;">
+      <input class="green text xxlarge" style="border-width: 2px;color: #555555;" type="text" value="{{user}}" onclick="this.select()">
+    </div>
+  </div>
+  {% if boxs %}
+  <h4 class="ui grey header">History</h4>
+  <div class="ui selection list">
+    {% for box in boxs %}
+    <div class="monospaced item">
+      <div class="right floated content">
+        <span class="grey text" style="position: absolute;right: 120px;">{{ box.count }} count</span>
+        <span class="green text"><a href="{% url "detail" %}?box={{ box.pk }}">{{ box.pk }}</a></span>
+      </div>
+      <div class="content">
+        <span class="grey text" style="font-size: 15px;"><b>{{ box.get_shell_display }}</b></span>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
   <h4 class="ui grey header">zsh</h4>
-  <pre class="prettyprint">curl -F "file=@$HOME/.zsh_history" \
-    http://127.0.0.1:8000/api/history/</pre>
+  <pre class="prettyprint">curl -F "user={{user}}" \
+     -F "file=@$HOME/.zsh_history" \
+     {{ domain }}/api/history/</pre>
   <h4 class="ui grey header">bash</h4>
-  <pre class="prettyprint">curl -F "file=@$HOME/.bash_history" \
-    http://127.0.0.1:8000/api/history/</pre>
+  <pre class="prettyprint">curl -F "user={{user}}" \
+     -F "file=@$HOME/.bash_history" \
+     {{ domain }}/api/history/</pre>
 </div>
 
 </div>

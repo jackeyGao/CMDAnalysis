@@ -25,7 +25,7 @@ function init_line() {
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
-                        '单击并在绘图区域拖动选择时间' : 'Pinch the chart to zoom in'
+                        '单击并在绘图区域拖动选择时间' : '捏住图可放大查看详细'
             },
             xAxis: {
                 type: 'datetime'
